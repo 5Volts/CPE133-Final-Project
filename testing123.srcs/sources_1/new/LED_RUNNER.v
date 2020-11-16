@@ -37,6 +37,33 @@ module clk_div(
     assign sclk = tmp_clk;
 endmodule
 
+module encoder16bit(
+    input [15:0]in,
+    output reg [3:0]out
+);
+    always_comb begin
+        case(in)
+            16'b0000000000000001:out=4'd0;
+            16'b0000000000000010:out=4'd1;
+            16'b0000000000000100:out=4'd2;
+            16'b0000000000001000:out=4'd3;
+            16'b0000000000010000:out=4'd4;
+            16'b0000000000100000:out=4'd5;
+            16'b0000000001000000:out=4'd6;
+            16'b0000000010000000:out=4'd7;
+            16'b0000000100000000:out=4'd8;
+            16'b0000001000000000:out=4'd9;
+            16'b0000010000000000:out=4'd10;
+            16'b0000100000000000:out=4'd11;
+            16'b0001000000000000:out=4'd12;
+            16'b0010000000000000:out=4'd13;
+            16'b0100000000000000:out=4'd14;
+            16'b1000000000000000:out=4'd15;
+            default: out=4'd0;
+        endcase
+    end
+endmodule
+
 module Dflipflop(
     input d,
     input clk,
@@ -50,7 +77,8 @@ endmodule
 
 module LED_RUNNER(
     input clk,
-    output [15:0]LEDS
+    output [15:0]LEDS,
+    output reg [3:0]CURR_LED
     );
     logic [15:0]din;
     logic [15:0]qout;
@@ -85,6 +113,11 @@ module LED_RUNNER(
 //    assign din[1] = qout[0] & ~qout[1] & ~qout[2];
 //    assign din[2] = ~qout[0] & qout[1] & ~qout[2];
     assign LEDS = qout;
+    
+    encoder16bit enc(
+    .in(qout),
+    .out(CURR_LED)
+    );
     
     Dflipflop dff0(
     .d(din[0]),

@@ -71,8 +71,6 @@ proc create_report { reportName command } {
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 1
-set_param xicom.use_bs_reader 1
-set_msg_config -id {Common 17-41} -limit 10000000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
@@ -87,8 +85,10 @@ set_property ip_output_repo c:/Users/tanru/testing123/testing123.cache/ip [curre
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
-read_verilog -library xil_defaultlib -sv C:/Users/tanru/testing123/testing123.srcs/sources_1/new/LED_RUNNER.v
-read_verilog -library xil_defaultlib C:/Users/tanru/testing123/testing123.srcs/sources_1/new/main.v
+read_verilog -library xil_defaultlib -sv {
+  C:/Users/tanru/testing123/testing123.srcs/sources_1/new/LED_RUNNER.v
+  C:/Users/tanru/testing123/testing123.srcs/sources_1/new/main.v
+}
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the

@@ -22,10 +22,15 @@
 
 module main(    
     input clk,
-    output [15:0]LEDS
+    output [15:0]LEDS,
+    output [3:0]seg,
+    output an
 );    
+    assign an = 1'b1;
+    
     LED_RUNNER led_runner(
     .clk(clk),
-    .LEDS(LEDS)
+    .LEDS(LEDS),
+    .CURR_LED(seg)
     );
 endmodule
