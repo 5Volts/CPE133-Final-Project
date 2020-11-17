@@ -1,0 +1,7 @@
+0.7
+2020.1
+May 27 2020
+20:09:33
+C:/Users/tanru/testing123/testing123.sim/sim_1/behav/xsim/glbl.v,1590624368,verilog,,,,glbl,,,,,,,,
+C:/Users/tanru/testing123/testing123.srcs/sources_1/new/LED_RUNNER.v,1605639576,systemVerilog,,C:/Users/tanru/testing123/testing123.srcs/sources_1/new/main.v,,Dflipflop;LED_RUNNER;encoder16bit,,,,,,,,
+C:/Users/tanru/testing123/testing123.srcs/sources_1/new/main.v,1605641616,systemVerilog,,,,clk_div;main,,,,,,,,

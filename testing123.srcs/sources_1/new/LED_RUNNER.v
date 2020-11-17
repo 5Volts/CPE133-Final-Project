@@ -18,24 +18,25 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-module clk_div(
-    input clk,
-    output sclk
- );
-    integer MAX_COUNT = 10000000;
-    integer div_cnt =0;
-    reg tmp_clk =0;
-    always @ (posedge clk)
-    begin
-        if(div_cnt == MAX_COUNT)
-        begin
-            tmp_clk = ~tmp_clk;
-            div_cnt = 0;
-        end else
-            div_cnt = div_cnt + 1;
-    end
-    assign sclk = tmp_clk;
-endmodule
+
+//module clk_div(
+//    input clk,
+//    output sclk
+// );
+//    integer MAX_COUNT = 10000000;
+//    integer div_cnt =0;
+//    reg tmp_clk =0;
+//    always @ (posedge clk)
+//    begin
+//        if(div_cnt == MAX_COUNT)
+//        begin
+//            tmp_clk = ~tmp_clk;
+//            div_cnt = 0;
+//        end else
+//            div_cnt = div_cnt + 1;
+//    end
+//    assign sclk = tmp_clk;
+//endmodule
 
 module encoder16bit(
     input [15:0]in,
@@ -83,11 +84,11 @@ module LED_RUNNER(
     logic [15:0]din;
     logic [15:0]qout;
     wire sclk;
-    
-    clk_div CLKDIV(
-    .clk(clk),
-    .sclk(sclk)
-    );
+    assign sclk = clk;
+//    clk_div CLKDIV(
+//    .clk(clk),
+//    .sclk(sclk)
+//    );
     assign din[0] = qout[15] | ~qout[0] & ~qout[1] & ~qout[2] & ~qout[3] & ~qout[4] & ~qout[5] & ~qout[6] & ~qout[7] & ~qout[8] & ~qout[9] & ~qout[10] & ~qout[11] & ~qout[12] & ~qout[13] & ~qout[14] & ~qout[15];
     assign din[1] = qout[0];
     assign din[2] = qout[1];
