@@ -18,7 +18,7 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-module clk_div(
+module clk_div2(
     input clk,
     input [31:0]mag,
     output sclk
@@ -42,16 +42,33 @@ module main(
     input BTN,
     input [15:0]SW,
     output [15:0]LEDS,
-    output reg [3:0]seg,
-    output an
+    output logic [7:0]seg,
+    output [3:0]an
 );    
-    assign an = 1'b0;
-    reg [3:0]segs;
-//    integer sw_idx;
+    //assign an = 1'b0;
+    logic [3:0]segs;
+    reg [7:0]score=0;
     wire sclk;
-    clk_div sdiv(
+    integer mag_ = 10000000;
+    logic wait_ = 0;
+    reg [7:0]stored_score;
+    
+//    D_FLIP_FLOPS(
+//    .D(score),
+//    .CLK(clk),
+//    .Q(stored_score)
+//    );
+    
+    BIN_2_DEC_SEG(
+    .Q_IN(score),
+    .CLK(clk),
+    .CAT(seg),
+    .AN(an)
+    );
+    
+    clk_div2 sdiv(
     .clk(clk),
-    .mag(30000000),
+    .mag(mag_),
     .sclk(sclk)
     );
     
@@ -61,21 +78,24 @@ module main(
     .CURR_LED(segs)
     );
     
-    always begin
-        if(SW[segs] == 1)begin
-            seg[0]=1;
+    always_ff @ (posedge clk) begin
+        if(SW[segs] == 1 && BTN == 1&& wait_==0)begin
+            score++;
+            wait_=1;
+            mag_= mag_ / 3;
+
         end 
-        else begin
-            seg[0]=0;
+        if(SW[segs] == 1 && BTN == 1&& wait_==1)begin          
+            score=score;   
         end 
-//        for(int sw_idx=0; sw_idx < 15; sw_idx++) begin
-//            $display(sw_idx, SW[sw_idx]);
-//            if(SW[sw_idx] == 1) begin
-//                seg[0]=1;
-//            end
-//            else begin
-//                seg[0]=0;
-//            end
+        else if(SW[segs] == 0 && BTN == 0 && wait_==1) begin
+            wait_=0;
+        end 
+        else if(SW[segs] == 0 && BTN == 1 && wait_==0) begin
+            score=0;
+        end 
+//        else begin
+//            score = score;
 //        end
     end
     

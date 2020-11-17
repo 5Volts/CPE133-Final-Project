@@ -189,14 +189,14 @@ endmodule
     input [7:0]Q_IN,
     input CLK,
     output [6:0]CAT,
-    output [3:0]AND
+    output [3:0]AN
     );
     sseg_dec seg_decoder(
     .ALU_VAL(Q_IN),
-    .SIGN(1),
+    .SIGN(0),
     .VALID(1),
     .CLK(CLK),
-    .DISP_EN(AND),
+    .DISP_EN(AN),
     .SEGMENTS(CAT)
     );
 endmodule

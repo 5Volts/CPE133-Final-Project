@@ -90,6 +90,7 @@ read_verilog -library xil_defaultlib -sv {
   C:/Users/tanru/testing123/testing123.srcs/sources_1/new/LED_RUNNER.v
   C:/Users/tanru/testing123/testing123.srcs/sources_1/new/main.v
 }
+read_verilog -library xil_defaultlib C:/Users/tanru/testing123/testing123.srcs/sources_1/new/BIN_2_DEC_SEG.v
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
