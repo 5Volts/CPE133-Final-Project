@@ -43,7 +43,7 @@ module main(
     input [15:0]SW,
     output [15:0]LEDS,
     output logic [7:0]seg,
-    output [3:0]an
+    output logic [3:0]an
 );    
     //assign an = 1'b0;
     logic [3:0]segs;
@@ -51,7 +51,7 @@ module main(
     wire sclk;
     integer mag_ = 10000000;
     logic wait_ = 0;
-    reg [7:0]stored_score;
+//    reg [7:0]stored_score;
     
 //    D_FLIP_FLOPS(
 //    .D(score),
@@ -78,25 +78,23 @@ module main(
     .CURR_LED(segs)
     );
     
-    always_ff @ (posedge clk) begin
+    always_ff @(posedge clk) begin
         if(SW[segs] == 1 && BTN == 1&& wait_==0)begin
             score++;
-            wait_=1;
-            mag_= mag_ / 3;
-
+            wait_ = 1;
+            mag_= mag_ - 1000000;
         end 
-        if(SW[segs] == 1 && BTN == 1&& wait_==1)begin          
-            score=score;   
-        end 
-        else if(SW[segs] == 0 && BTN == 0 && wait_==1) begin
+        else if(SW[segs] == 0 && wait_==1) begin
             wait_=0;
         end 
         else if(SW[segs] == 0 && BTN == 1 && wait_==0) begin
             score=0;
+            mag_ = 10000000;
         end 
-//        else begin
-//            score = score;
-//        end
+        else begin
+            mag_ = mag_;
+            score = score;
+        end
     end
     
 endmodule

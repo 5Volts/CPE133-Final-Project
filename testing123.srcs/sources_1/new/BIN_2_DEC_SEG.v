@@ -188,7 +188,7 @@ endmodule
  module BIN_2_DEC_SEG(
     input [7:0]Q_IN,
     input CLK,
-    output [6:0]CAT,
+    output [7:0]CAT,
     output [3:0]AN
     );
     sseg_dec seg_decoder(
