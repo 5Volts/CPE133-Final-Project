@@ -114,6 +114,8 @@ proc step_failed { step } {
   close $ch
 }
 
+set_msg_config -id {Synth 8-256} -limit 10000
+set_msg_config -id {Synth 8-638} -limit 10000
 
 OPTRACE "Implementation" START { ROLLUP_1 }
 OPTRACE "Phase: Write Bitstream" START { ROLLUP_AUTO }
@@ -123,6 +125,7 @@ set ACTIVE_STEP write_bitstream
 set rc [catch {
   create_msg_db write_bitstream.pb
   set_param chipscope.maxJobs 1
+  set_param synth.incrementalSynthesisCache C:/Users/tanru/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-9488-DESKTOP-VP2O40J/incrSyn
   set_param xicom.use_bs_reader 1
   open_checkpoint main_routed.dcp
   set_property webtalk.parent_dir C:/Users/tanru/testing123/testing123.cache/wt [current_project]

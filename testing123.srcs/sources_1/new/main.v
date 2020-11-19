@@ -25,9 +25,9 @@ module clk_div2(
  );
     integer div_cnt =0;
     reg tmp_clk =0;
-    always @ (posedge clk)
+    always_ff @ (posedge clk)
     begin
-        if(div_cnt == mag)
+        if(div_cnt >= mag)
         begin
             tmp_clk = ~tmp_clk;
             div_cnt = 0;
@@ -49,7 +49,7 @@ module main(
     logic [3:0]segs;
     reg [7:0]score=0;
     wire sclk;
-    integer mag_ = 10000000;
+    logic [31:0] mag_ = 10000000;
     logic wait_ = 0;
 //    reg [7:0]stored_score;
     
@@ -59,7 +59,7 @@ module main(
 //    .Q(stored_score)
 //    );
     
-    BIN_2_DEC_SEG(
+    BIN_2_DEC_SEG seg2(
     .Q_IN(score),
     .CLK(clk),
     .CAT(seg),
@@ -71,6 +71,8 @@ module main(
     .mag(mag_),
     .sclk(sclk)
     );
+    //assign sclk = clk;
+    
     
     LED_RUNNER led_runner(
     .clk(sclk),
@@ -79,22 +81,20 @@ module main(
     );
     
     always_ff @(posedge clk) begin
-        if(SW[segs] == 1 && BTN == 1&& wait_==0)begin
+        if(SW[segs] == 1 && BTN == 1 && wait_==0)begin
             score++;
-            wait_ = 1;
-            mag_= mag_ - 1000000;
+            wait_ <= 1;
+            mag_ <= mag_ / 2;
+//            mag_ = mag_ - 2000000;
         end 
         else if(SW[segs] == 0 && wait_==1) begin
-            wait_=0;
+            wait_ <= 0;
         end 
         else if(SW[segs] == 0 && BTN == 1 && wait_==0) begin
-            score=0;
-            mag_ = 10000000;
+            score <= 0;
+            mag_ <= 10000000;
         end 
-        else begin
-            mag_ = mag_;
-            score = score;
-        end
+     
     end
     
 endmodule

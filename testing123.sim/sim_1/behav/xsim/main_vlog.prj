@@ -1,4 +1,7 @@
 # compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../testing123.srcs/sources_1/new/BIN_2_DEC_SEG.v" \
+
 sv xil_defaultlib  \
 "../../../../testing123.srcs/sources_1/new/LED_RUNNER.v" \
 "../../../../testing123.srcs/sources_1/new/main.v" \

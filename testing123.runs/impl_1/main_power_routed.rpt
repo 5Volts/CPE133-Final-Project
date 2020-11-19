@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
-| Date             : Tue Nov 17 16:44:29 2020
+| Date             : Thu Nov 19 12:58:56 2020
 | Host             : DESKTOP-VP2O40J running 64-bit major release  (build 9200)
 | Command          : report_power -file main_power_routed.rpt -pb main_power_summary_routed.pb -rpx main_power_routed.rpx
 | Design           : main
@@ -53,13 +53,13 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.001 |        3 |       --- |             --- |
-| Slice Logic    |    <0.001 |      327 |       --- |             --- |
-|   LUT as Logic |    <0.001 |      109 |     20800 |            0.52 |
-|   CARRY4       |    <0.001 |       26 |      8150 |            0.32 |
-|   Register     |    <0.001 |      133 |     41600 |            0.32 |
+| Slice Logic    |    <0.001 |      321 |       --- |             --- |
+|   LUT as Logic |    <0.001 |       91 |     20800 |            0.44 |
+|   Register     |    <0.001 |      131 |     41600 |            0.31 |
+|   CARRY4       |    <0.001 |       20 |      8150 |            0.25 |
 |   BUFG         |    <0.001 |        1 |        32 |            3.13 |
 |   Others       |     0.000 |       40 |       --- |             --- |
-| Signals        |     0.001 |      256 |       --- |             --- |
+| Signals        |     0.001 |      251 |       --- |             --- |
 | I/O            |     0.043 |       46 |       106 |           43.40 |
 | Static Power   |     0.072 |          |           |                 |
 | Total          |     0.118 |          |           |                 |
@@ -138,12 +138,12 @@ Table of Contents
 3.1 By Hierarchy
 ----------------
 
-+------------------+-----------+
-| Name             | Power (W) |
-+------------------+-----------+
-| main             |     0.046 |
-|   nolabel_line62 |     0.002 |
-|     seg_decoder  |     0.002 |
-+------------------+-----------+
++-----------------+-----------+
+| Name            | Power (W) |
++-----------------+-----------+
+| main            |     0.046 |
+|   seg2          |     0.002 |
+|     seg_decoder |     0.002 |
++-----------------+-----------+
 
 
